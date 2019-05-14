@@ -15,23 +15,25 @@
 
 function hearsay(level) {
   const matrix = [[1]];
-  for(let i = 0; i < level; i++) {
-    let hash = [];
-    let pointerCounter = 0;
-    let pointerNumber = 0;
-    for(let j = 0; j < matrix[i].length; j++ ){
-      if (j === 0 || matrix[i][j] !== hash[pointerNumber]) {
-        hash.push(1)
-        hash.push(matrix[i][j]);
-        pointerNumber = hash.length - 1;
-        pointerCounter = pointerNumber - 1;
+  if(level > 1){
+    for (let i = 0; i < level; i++) {
+      let hash = [];
+      let pointerCounter = 0;
+      let pointerNumber = 0;
+      for (let j = 0; j < matrix[i].length; j++) {
+        if (j === 0 || matrix[i][j] !== hash[pointerNumber]) {
+          hash.push(1)
+          hash.push(matrix[i][j]);
+          pointerNumber = hash.length - 1;
+          pointerCounter = pointerNumber - 1;
+        }
+        else if (matrix[i][j] === hash[pointerNumber]) {
+          hash[pointerCounter]++;
+        }
       }
-      else if(matrix[i][j] === hash[pointerNumber]) {
-        hash[pointerCounter]++;
-      }
+      //console.log(hash);
+      matrix.push(hash);
     }
-    //console.log(hash);
-    matrix.push(hash);
   }
   return(matrix[level - 1]);
 }
